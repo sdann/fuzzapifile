@@ -12,5 +12,7 @@ void showSysRec(struct sysRec *x);
 void showSysRecArr(struct sysRec *x, int n);
 unsigned long doSysRec(struct sysRec *x);
 unsigned long doSysRecArr(struct sysRec *x, int n);
+int parse_call_args(const uint8_t *data, size_t size, struct sysRec *calls, int *ncalls);
 
 int getStdFile(int typ);
+

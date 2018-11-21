@@ -388,3 +388,25 @@ doSysRecArr(struct sysRec *x, int n)
         ret = doSysRec(x + i);
     return ret;
 }
+
+int
+parse_call_args(const uint8_t *data,
+                size_t size,
+                struct sysRec *calls,
+                int *ncalls)
+{
+    int err = 0;
+    struct slice slice = {0};
+
+    // Parse call arguments from fuzzed test file
+    mkSlice(&slice, data, size);
+    err = parseSysRecArr(&slice, 10, calls, ncalls);
+
+    if (verbose) {
+        printf("Parse results = %d, num_calls %d\n", err, *ncalls);
+        if (err == 0)
+            showSysRecArr(calls, *ncalls);
+    }
+
+    return err;
+}
